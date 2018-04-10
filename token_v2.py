@@ -27,26 +27,26 @@ class Tokens(object):
         for i in self._data:
             w.append("Kind: {0}\nValue: {1}\n\n".format(i._kind, i._value))
         return "".join(w)
+
+
 class tokenenum(enum.Enum):
     # Integer constant
     INT = enum.auto()
-    
-    
+
     # arithmetic operators
     PLUS = enum.auto()
     MINUS = enum.auto()
     MULTIPLY = enum.auto()
     DIVIDE = enum.auto()
     REMAINDER = enum.auto()
-    
-    
+
     # relational operators
     EQUAL = enum.auto()
     NOTEQUAL = enum.auto()
     LESSTHAN = enum.auto()
     LESSTHANEQUAL = enum.auto()
     GREATERTHAN = enum.auto()
-    GREATERTHANEQUAL =enum.auto()
+    GREATERTHANEQUAL = enum.auto()
 
     # Assignment operators
     ASSIGN = enum.auto
@@ -59,10 +59,9 @@ class tokenenum(enum.Enum):
     DOT = enum.auto()
     COMMA = enum.auto()
 
-    #ID (variable/Program Names)
+    # ID (variable/Program Names)
     ID = enum.auto()
-    
-    
+
     # keywords
     BEGIN = enum.auto()
     DO = enum.auto()
@@ -76,8 +75,8 @@ class tokenenum(enum.Enum):
     TRUE = enum.auto()
     VAR = enum.auto()
     WHILE = enum.auto()
-    
-    
+
+
 
 class token(object):
     def __init__(self, kind, value):
@@ -95,15 +94,36 @@ class token(object):
     def value(self):
         return self._value
 
+
+arithmetic = {"+" : tokenenum.PLUS,
+              "-" : tokenenum.MINUS,
+              "*" : tokenenum.MULTIPLY,
+              "/" : tokenenum.DIVIDE,
+              "%" : tokenenum.REMAINDER}
+
+relational = {"=" : tokenenum.EQUAL,
+              "!=" : tokenenum.NOTEQUAL,
+              "<" : tokenenum.LESSTHAN,
+              "<=" : tokenenum.LESSTHANEQUAL,
+              ">" : tokenenum.GREATERTHAN,
+              ">=" : tokenenum.GREATERTHANEQUAL}
+
+punctuation = {";" : tokenenum.SEMI,
+               "(" : tokenenum.OPEN,
+               ")" : tokenenum.CLOSE,
+               "." : tokenenum.DOT,
+               "," : tokenenum.COMMA}
+
 keywords = {"begin" : tokenenum.BEGIN,
            "do" : tokenenum.DO,
            "end" : tokenenum.END,
            "false" : tokenenum.FALSE,
            "halt" : tokenenum.HALT,
            "if" : tokenenum.IF,
-            "print" : tokenenum.PRINT,
-            "program" : tokenenum.PROGRAM,
-            "then" : tokenenum.THEN,
-            "true" : tokenenum.TRUE,
-            "var" : tokenenum.VAR,
-            "while" : tokenenum.WHILE}
+           "print" : tokenenum.PRINT,
+           "program" : tokenenum.PROGRAM,
+           "then" : tokenenum.THEN,
+           "true" : tokenenum.TRUE,
+           "var" : tokenenum.VAR,
+           "while" : tokenenum.WHILE}
+
