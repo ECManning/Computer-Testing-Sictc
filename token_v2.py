@@ -43,13 +43,24 @@ class tokenenum(enum.Enum):
     # relational operators
     EQUAL = enum.auto()
     NOTEQUAL = enum.auto()
-    # punctuation
+    LESSTHAN = enum.auto()
+    LESSTHANEQUAL = enum.auto()
+    GREATERTHAN = enum.auto()
+    GREATERTHANEQUAL =enum.auto()
+
+    # Assignment operators
+    ASSIGN = enum.auto
+
+    # Punctuation
     COLON = enum.auto()
     SEMI = enum.auto()
     OPEN = enum.auto()
     CLOSE = enum.auto()
     DOT = enum.auto()
     COMMA = enum.auto()
+
+    #ID (variable/Program Names)
+    ID = enum.auto()
     
     
     # keywords
