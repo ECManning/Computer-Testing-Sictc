@@ -1,5 +1,6 @@
-# author: Jeremy Temple, Eli Manning
+# author: Jeremy Temple, Eli Manning, Hayden Walters
 import enum
+import operator
 
 
 class Tokens(object):
@@ -8,6 +9,9 @@ class Tokens(object):
 
     def __iter__(self):
         return iter(self._data)
+
+    def __len__(self):
+        return len(self._data)
 
     def append(self, token):
         self._data.append(token)
@@ -34,22 +38,10 @@ class tokenenum(enum.Enum):
     INT = enum.auto()
 
     # arithmetic operators
-    PLUS = enum.auto()
-    MINUS = enum.auto()
-    MULTIPLY = enum.auto()
-    DIVIDE = enum.auto()
-    REMAINDER = enum.auto()
-
-    # relational operators
-    EQUAL = enum.auto()
-    NOTEQUAL = enum.auto()
-    LESSTHAN = enum.auto()
-    LESSTHANEQUAL = enum.auto()
-    GREATERTHAN = enum.auto()
-    GREATERTHANEQUAL = enum.auto()
+    OPERATOR = enum.auto()
 
     # Assignment operators
-    ASSIGN = enum.auto
+    ASSIGN = enum.auto()
 
     # Punctuation
     COLON = enum.auto()
@@ -66,13 +58,12 @@ class tokenenum(enum.Enum):
     BEGIN = enum.auto()
     DO = enum.auto()
     END = enum.auto()
-    FALSE = enum.auto()
     HALT = enum.auto()
     IF = enum.auto()
     PRINT = enum.auto()
     PROGRAM = enum.auto()
     THEN = enum.auto()
-    TRUE = enum.auto()
+    BOOL = enum.auto()
     VAR = enum.auto()
     WHILE = enum.auto()
 
@@ -95,20 +86,21 @@ class token(object):
         return self._value
 
 
-arithmetic = {"+" : tokenenum.PLUS,
-              "-" : tokenenum.MINUS,
-              "*" : tokenenum.MULTIPLY,
-              "/" : tokenenum.DIVIDE,
-              "%" : tokenenum.REMAINDER}
+arithmetic = {"+" : tokenenum.OPERATOR,
+              "-" : tokenenum.OPERATOR,
+              "*" : tokenenum.OPERATOR,
+              "/" : tokenenum.OPERATOR,
+              "%" : tokenenum.OPERATOR}
 
-relational = {"=" : tokenenum.EQUAL,
-              "!=" : tokenenum.NOTEQUAL,
-              "<" : tokenenum.LESSTHAN,
-              "<=" : tokenenum.LESSTHANEQUAL,
-              ">" : tokenenum.GREATERTHAN,
-              ">=" : tokenenum.GREATERTHANEQUAL}
+relational = {"=" : tokenenum.OPERATOR,
+              "!=" : tokenenum.OPERATOR,
+              "<" : tokenenum.OPERATOR,
+              "<=" : tokenenum.OPERATOR,
+              ">" : tokenenum.OPERATOR,
+              ">=" : tokenenum.OPERATOR}
 
-punctuation = {";" : tokenenum.SEMI,
+punctuation = {":" : tokenenum.COLON,
+               ";" : tokenenum.SEMI,
                "(" : tokenenum.OPEN,
                ")" : tokenenum.CLOSE,
                "." : tokenenum.DOT,
@@ -117,13 +109,18 @@ punctuation = {";" : tokenenum.SEMI,
 keywords = {"begin" : tokenenum.BEGIN,
            "do" : tokenenum.DO,
            "end" : tokenenum.END,
-           "false" : tokenenum.FALSE,
+           "false" : tokenenum.BOOL,
            "halt" : tokenenum.HALT,
            "if" : tokenenum.IF,
            "print" : tokenenum.PRINT,
            "program" : tokenenum.PROGRAM,
            "then" : tokenenum.THEN,
-           "true" : tokenenum.TRUE,
+           "true" : tokenenum.BOOL,
            "var" : tokenenum.VAR,
            "while" : tokenenum.WHILE}
 
+non_enum_math = {"+" : operator.add,
+                 "-" : operator.sub,
+                 "*" : operator.mul,
+                 "/" : operator.floordiv,
+                 "%" : operator.mod}
