@@ -1,3 +1,4 @@
+# author: Jeremy Temple, Eli Manning, Hayden Walters
 from token_v2 import tokenenum, arithmetic, relational
 tokens = None
 token = None
